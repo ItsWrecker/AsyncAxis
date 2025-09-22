@@ -19,10 +19,11 @@ class PlayerViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val videoUrls = listOf(
+        "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4",
+        "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
         "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-
+        "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+        "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4"
     )
 
     init {
@@ -47,15 +48,18 @@ class PlayerViewModel @Inject constructor(
                 .setClippingConfiguration(
                     MediaItem.ClippingConfiguration.Builder()
                         .setStartsAtKeyFrame(true)
+                        .setRelativeToDefaultPosition(true)
+                        .setRelativeToLiveWindow(true)
                         .setStartPositionMs(1000)
                         .setEndPositionMs(11000)
-                    .build()
+                        .build()
                 ).build()
-            concatenatingMediaSource.add(mediaItem,0)
+            concatenatingMediaSource.add(mediaItem, 0)
         }
         return concatenatingMediaSource.build()
 
     }
+
     override fun onCleared() {
         super.onCleared()
         player.release()
